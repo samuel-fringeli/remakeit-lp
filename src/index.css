@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-primary: #5046e6;
+}
+
+.MuiButton-root {
+	text-transform: none !important;
+}
