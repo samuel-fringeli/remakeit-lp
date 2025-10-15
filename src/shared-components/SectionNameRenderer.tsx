@@ -1,9 +1,18 @@
 import { useTranslation } from "react-i18next";
 
-const SectionNameRenderer = ({ name }: { name: string }) => {
+const SectionNameRenderer = ({
+  name,
+  isDark = false,
+}: {
+  name: string;
+  isDark?: boolean;
+}) => {
   const { t } = useTranslation();
+  const classes = isDark ? "text-white bg-primary" : "border-primary";
   return (
-    <div className="uppercase rounded-full border border-primary px-4 py-1 text-sm w-fit">
+    <div
+      className={`uppercase rounded-full border px-3 py-1 text-xs w-fit font-semibold ${classes}`}
+    >
       {t(name)}
     </div>
   );

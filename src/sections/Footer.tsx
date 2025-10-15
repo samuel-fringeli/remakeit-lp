@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faDiscord } from "@fortawesome/free-brands-svg-icons";
-import Logo from "../assets/Logo";
+import RemakeItLogo from "../shared-components/RemakeItLogo";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -54,9 +54,8 @@ const Footer = () => {
       <div className="container">
         <div className="bg-white w-full rounded-[64px] py-10 px-24 space-y-4 text-primary">
           <div className="flex flex-wrap text-center text-lg font-semibold space-y-8">
-            <div className="w-full lg:w-[20%] text-xl font-bold flex h-fit justify-center lg:justify-start items-center">
-              <Logo className="size-6" />
-              Remakeit
+            <div className="w-full lg:w-[20%]">
+              <RemakeItLogo />
             </div>
 
             {footerMenus.map((menu, index) => (

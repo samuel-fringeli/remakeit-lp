@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleCheck,
   faXmarkCircle,
-} from "@fortawesome/free-regular-svg-icons";
-import Logo from "../assets/Logo";
+} from "@fortawesome/free-solid-svg-icons";
+import RemakeItLogo from "../shared-components/RemakeItLogo";
 
 const Differentiation = () => {
   const { t } = useTranslation();
@@ -41,10 +41,7 @@ const Differentiation = () => {
         <div className="lg:w-1/2 bg-primary/20 p-12 space-y-8 text-lg rounded-2xl border border-primary/30 shadow-xl">
           <div className="flex items-center">
             <span className="me-2">With</span>
-            <div className="text-primary text-xl font-bold flex h-fit items-center">
-              <Logo className="size-6" />
-              Remakeit
-            </div>
+            <RemakeItLogo />
           </div>
           {differences.remakeit.map((item, index) => (
             <div key={index} className="flex gap-2 items-center">

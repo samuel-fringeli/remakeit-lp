@@ -1,28 +1,35 @@
+import { Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n";
+
+const LANGUAGES = ["fr", "en", "es"];
+
 const LanguageSelector = () => {
-	return <div></div>;
+  const {
+    i18n: { language },
+  } = useTranslation();
+
+  const handleLanguageChange = (lng: string) => {
+    if (language !== lng) {
+      i18n.changeLanguage(lng);
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-2 w-fit">
+      {LANGUAGES.map((lng) => (
+        <Button
+          key={lng}
+          onClick={() => handleLanguageChange(lng)}
+          className={`!text-white !p-1 !text-xs !min-w-0  ${
+            language === lng ? "!border border-white rounded-full" : ""
+          }`}
+        >
+          {lng.toUpperCase()}
+        </Button>
+      ))}
+    </div>
+  );
 };
 
 export default LanguageSelector;
-
-// // src/App.jsx
-// import React from 'react';
-// import { useTranslation } from 'react-i18next';
-
-// function App() {
-//   const { t, i18n } = useTranslation();
-
-//   const changeLanguage = (lng) => {
-//     i18n.changeLanguage(lng);
-//   };
-
-//   return (
-//     <div>
-//       <h1>{t('welcome')}</h1>
-//       <p>{t('greeting', { name: 'User' })}</p>
-//       <button onClick={() => changeLanguage('en')}>English</button>
-//       <button onClick={() => changeLanguage('es')}>Español</button>
-//     </div>
-//   );
-// }
-
-// export default App;
