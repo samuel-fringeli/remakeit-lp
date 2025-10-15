@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import SectionNameRenderer from "../shared-components/SectionNameRenderer";
 import { Grid } from "@mui/material";
+import promptToVideo from "../assets/services/prompt-to-video.avif";
+import servicesCardVeo3 from "../assets/services/services-card-veo-3.avif";
 
 const cardsData = [
   {
@@ -13,7 +15,7 @@ const cardsData = [
     title: "Prompt to video",
     description:
       "Describe your idea: the AI generates the script and the content. Ideal for launching new series or formats in a few minutes",
-    imageSrc: "",
+    imageSrc: promptToVideo,
   },
   {
     title: "Speech synthesis",
@@ -25,7 +27,7 @@ const cardsData = [
     title: "VEO 3 power",
     description:
       "Access the new technology of Google Veo3 directly in RemakeIt. Generation of realistic videos, spectacular settings and living characters",
-    imageSrc: "",
+    imageSrc: servicesCardVeo3,
   },
 ];
 
@@ -38,19 +40,25 @@ const Card = ({
 }: {
   title: string;
   description: string;
-  imageSrc: string;
+  imageSrc?: string;
   gridSize: number;
   className?: string;
 }) => {
   const { t } = useTranslation();
   return (
     <Grid
-      size={gridSize}
-      className={`p-4 rounded-lg shadow-md space-y-8 cursor-default text-lg ${className}`}
+      size={{ xs: 12, md: gridSize }}
+      className={`p-8 rounded-2xl shadow-md space-y-8 cursor-default text-lg ${className}`}
     >
       <h3 className="text-white font-semibold text-2xl">{t(title)}</h3>
-      <p className="mb-4">{t(description)}</p>
-      {!!imageSrc && <img src={imageSrc} alt={title} />}
+      <p className="mb-8">{t(description)}</p>
+      {imageSrc ? (
+        <img src={imageSrc} alt={title} className="rounded-2xl h-36" />
+      ) : (
+        <div className="bg-white text-gray-800 !text-sm rounded-lg px-8 py-4">
+          Youtube video URL / Video idea
+        </div>
+      )}
     </Grid>
   );
 };
@@ -75,11 +83,11 @@ const Services = () => {
             title={card.title}
             description={card.description}
             imageSrc={card.imageSrc}
-            gridSize={[0, 3].includes(index) ? 7 : 5}
+            gridSize={[0, 3].includes(index) ? 5 : 7}
             className={
               [0, 3].includes(index)
-                ? "bg-primary/80 text-white/60 hover:bg-black/90 w-2/3"
-                : "bg-black/90 text-white/60 hover:bg-primary/80 w-1/3"
+                ? "bg-primary/80 text-white/60 hover:bg-black/90"
+                : "bg-black/90 text-white/60 hover:bg-primary/80"
             }
           />
         ))}
