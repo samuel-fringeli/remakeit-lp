@@ -7,6 +7,8 @@ import {
   faTiktok,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import Subtext from "../shared-components/Subtext";
+import TitleRenderer from "../shared-components/TitleRenderer";
 
 const cardsData = [
   {
@@ -73,15 +75,16 @@ const cardsData = [
 
 const Concept = () => {
   return (
-    <section className="container flex flex-col space-y-8 items-center py-8">
+    <section
+      id="concept"
+      className="container flex flex-col space-y-8 items-center py-8"
+    >
       <SectionNameRenderer name="Concept" />
-      <div className="uppercase text-6xl font-bold text-center">
-        <span>Get your videos</span>
-        <span className="text-primary ms-4">viral</span>
-      </div>
-      <div className="text-lg w-1/3 text-gray-400 font-semibold text-center">
-        In 3 simple steps, go from your idea to a viral video ready to post
-      </div>
+      <TitleRenderer title="Get your videos viral" highlightIndexes={[-1]} />
+      <Subtext
+        text="In 3 simple steps, go from your idea to a viral video ready to post"
+        width="1/3"
+      />
 
       <div className="flex w-full gap-6 flex-col lg:flex-row justify-center">
         {cardsData.map((card, index) => (

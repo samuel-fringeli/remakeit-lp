@@ -1,14 +1,13 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Button,
-} from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 import { useTranslation } from "react-i18next";
+
+import SectionNameRenderer from "../shared-components/SectionNameRenderer";
+import CustomButton from "../shared-components/CustomButton";
+import Subtext from "../shared-components/Subtext";
+import TitleRenderer from "../shared-components/TitleRenderer";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleDown } from "@fortawesome/free-regular-svg-icons";
-import SectionNameRenderer from "../shared-components/SectionNameRenderer";
 
 const Faq = () => {
   const { t } = useTranslation();
@@ -42,22 +41,18 @@ const Faq = () => {
   ];
 
   return (
-    <div className="container flex flex-col lg:flex-row gap-8 mx-auto my-16">
+    <section
+      id="faq"
+      className="container flex flex-col lg:flex-row gap-8 mx-auto my-16"
+    >
       <div className="w-full lg:w-1/2 flex flex-col items-center justify-center gap-8">
-        <SectionNameRenderer name="FAQS" />
-        <div className="text-6xl font-bold text-center">
-          <span>YOUR QUESTIONS, OUR</span>
-          <span className="ml-4 text-primary">RESPONSES</span>
-        </div>
-        <div className="text-lg text-gray-400 font-semibold text-center">
-          Here are answers to the most frequently asked questions about
-          RemakeIt. If you have others, our team is available to help you
-        </div>
-        <Button
-          variant="contained"
-          className="!bg-primary rounded-full hover:bg-primary/60"
-          children={t("Try it now")}
+        <SectionNameRenderer name="FAQs" />
+        <TitleRenderer
+          title="Your questions, our responses"
+          highlightIndexes={[-1]}
         />
+        <Subtext text="Here are answers to the most frequently asked questions about RemakeIt. If you have others, our team is available to help you" />
+        <CustomButton />
       </div>
 
       <div className="w-full lg:w-1/2 space-y-8">
@@ -88,7 +83,7 @@ const Faq = () => {
           </Accordion>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

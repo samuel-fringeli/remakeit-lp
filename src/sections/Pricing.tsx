@@ -132,7 +132,7 @@ const Pricing = () => {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-16 w-full max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-6 md:px-16 w-full max-w-6xl">
           {pricingPlans.map((plan, index) => (
             <motion.div
               key={index}

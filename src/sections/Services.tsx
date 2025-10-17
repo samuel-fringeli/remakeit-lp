@@ -3,6 +3,8 @@ import SectionNameRenderer from "../shared-components/SectionNameRenderer";
 import { Grid } from "@mui/material";
 import promptToVideo from "../assets/services/prompt-to-video.avif";
 import servicesCardVeo3 from "../assets/services/services-card-veo-3.avif";
+import Subtext from "../shared-components/Subtext";
+import TitleRenderer from "../shared-components/TitleRenderer";
 
 const cardsData = [
   {
@@ -56,7 +58,7 @@ const Card = ({
         <img src={imageSrc} alt={title} className="rounded-2xl h-36" />
       ) : (
         <div className="bg-white text-gray-800 !text-sm rounded-lg px-8 py-4">
-          Youtube video URL / Video idea
+          {t("Youtube video URL / Video idea")}
         </div>
       )}
     </Grid>
@@ -65,16 +67,21 @@ const Card = ({
 
 const Services = () => {
   return (
-    <div className="container flex flex-col items-center justify-center py-8 space-y-8">
+    <section
+      id="services"
+      className="container flex flex-col items-center justify-center py-8 space-y-8"
+    >
       <SectionNameRenderer name="Services" />
-      <div className="text-6xl font-bold uppercase text-center">
-        All of your <span className="text-primary">video tools</span>, at
-        <span className="text-primary ms-4">same place</span>
-      </div>
-      <div className="text-lg w-1/3 text-gray-400 font-semibold text-center">
-        Generate, improve, and publish your content in a single workflow. Choose
-        a service below to find out the details and a short usage demo
-      </div>
+
+      <TitleRenderer
+        title="All of your video tools, at same place"
+        highlightIndexes={[3, 4, -1, -2]}
+      />
+
+      <Subtext
+        text="Generate, improve, and publish your content in a single workflow. Choose a service below to find out the details and a short usage demo"
+        width="1/3"
+      />
 
       <Grid container spacing={2}>
         {cardsData.map((card, index) => (
@@ -92,7 +99,7 @@ const Services = () => {
           />
         ))}
       </Grid>
-    </div>
+    </section>
   );
 };
 

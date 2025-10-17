@@ -4,7 +4,7 @@ import i18n from "../i18n";
 
 const LANGUAGES = ["fr", "en", "es"];
 
-const LanguageSelector = () => {
+const LanguageSelector = ({ className }: { className?: string }) => {
   const {
     i18n: { language },
   } = useTranslation();
@@ -21,7 +21,7 @@ const LanguageSelector = () => {
         <Button
           key={lng}
           onClick={() => handleLanguageChange(lng)}
-          className={`!text-white !p-1 !text-xs !min-w-0  ${
+          className={`!p-1 !text-xs !min-w-0 ${className}  ${
             language === lng ? "!border border-white rounded-full" : ""
           }`}
         >

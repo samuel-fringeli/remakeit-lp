@@ -3,6 +3,7 @@ import { Tabs, Tab, TextField, Button } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faA } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { useTranslation } from "react-i18next";
 
 const PromptOrYoutube = () => {
   const [tabValue, setTabValue] = useState(0);
@@ -11,6 +12,8 @@ const PromptOrYoutube = () => {
     { label: "Prompt", icon: faA },
     { label: "YouTube", icon: faYoutube },
   ];
+
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col items-center w-full gap-3">
@@ -35,7 +38,7 @@ const PromptOrYoutube = () => {
                 }`}
               >
                 <FontAwesomeIcon icon={tab.icon} className="size-4" />
-                {tab.label}
+                {t(tab.label)}
               </div>
             }
           />
@@ -48,7 +51,7 @@ const PromptOrYoutube = () => {
           fullWidth
           size="small"
           placeholder={
-            tabValue === 0 ? "Write your video idea" : "YouTube video URL"
+            tabValue === 0 ? t("Write your video idea") : t("YouTube video URL")
           }
           slotProps={{
             input: { className: "bg-white/20" },
@@ -62,12 +65,12 @@ const PromptOrYoutube = () => {
           disableElevation
           className="!bg-white !text-primary !uppercase !font-semibold hover:!bg-gray-100 transition"
         >
-          Generate the TikTok
+          {t("Generate the TikTok")}
         </Button>
       </div>
 
       <div className="text-xs text-white opacity-80">
-        *No bank card required
+        *{t("No bank card required")}
       </div>
     </div>
   );

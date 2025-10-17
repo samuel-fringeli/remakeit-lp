@@ -1,10 +1,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const texts = ["in 1 click.", "in 1 prompt.", "in 1 url."];
 
 export default function HeroText() {
   const [index, setIndex] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -16,9 +18,9 @@ export default function HeroText() {
   return (
     <>
       <div className="text-7xl text-white font-bold space-x-4 text-center">
-        <span>Create</span>
+        <span>{t("Create")}</span>
         <span className="text-primary bg-white px-4 rounded-2xl">
-          viral clips
+          {t("viral clips")}
         </span>
         <AnimatePresence mode="wait">
           <motion.div
@@ -29,13 +31,14 @@ export default function HeroText() {
             exit={{ rotateX: -90, opacity: 0, y: -20 }}
             transition={{ duration: 0.6, ease: "backInOut" }}
           >
-            {texts[index]}
+            {t(texts[index])}
           </motion.div>
         </AnimatePresence>
       </div>
       <div className="text-white text-xl font-bold text-center max-w-120">
-        Instantly turn your videos and ideas into viral and monetizable short
-        content
+        {t(
+          "Instantly turn your videos and ideas into viral and monetizable short content"
+        )}
       </div>
     </>
   );

@@ -1,27 +1,24 @@
-import { Button } from "@mui/material";
-import { useTranslation } from "react-i18next";
+import CustomButton from "../shared-components/CustomButton";
+import Subtext from "../shared-components/Subtext";
+import TitleRenderer from "../shared-components/TitleRenderer";
 
 const TryItNow = () => {
-  const { t } = useTranslation();
   return (
-    <div className="container mx-auto my-16">
+    <section id="try-it-now" className="container mx-auto my-16">
       <div className="rounded-4xl bg-black p-16 text-white space-y-16">
-        <div className="uppercase text-6xl font-bold">
-          <span>{t("Ready to create your")}</span>
-          <span className="text-primary"> {t("viral videos?")}</span>
-        </div>
-        <div className="text-xl w-1/2">
-          {t(
-            "Join RemakeIt now and start generating your first content in one click. Register for free and test the platform"
-          )}
-        </div>
-        <Button
-          variant="contained"
-          className="rounded-full !bg-primary hover:!bg-primary/80"
-          children={t("Try it now")}
+        <TitleRenderer
+          title="Ready to create your viral videos?"
+          highlightIndexes={[-1, -2]}
+          align="start"
         />
+        <Subtext
+          text="Join RemakeIt now and start generating your first content in one click. Register for free and test the platform"
+          align="left"
+          width="1/2"
+        />
+        <CustomButton />
       </div>
-    </div>
+    </section>
   );
 };
 

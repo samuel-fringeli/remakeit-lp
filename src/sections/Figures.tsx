@@ -1,8 +1,12 @@
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import SectionNameRenderer from "../shared-components/SectionNameRenderer";
 import type { ReactNode } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faPlayCircle, faUser } from "@fortawesome/free-solid-svg-icons";
+import CustomButton from "../shared-components/CustomButton";
+import Subtext from "../shared-components/Subtext";
+import TitleRenderer from "../shared-components/TitleRenderer";
+import { useTranslation } from "react-i18next";
 
 const cardData = [
   {
@@ -34,41 +38,44 @@ const Card = ({
   number: number;
   postfix?: string;
   subtext: string;
-}) => (
-  <Grid
-    size={{ xs: 12, md: 4 }}
-    className="bg-primary relative text-white rounded-lg px-16 pb-8 pt-16 space-y-2 cursor-default"
-  >
-    <div className="absolute top-4 left-4">{icon}</div>
-    <div className="flex items-center justify-center text-2xl font-bold">
-      + <span className="text-7xl font-bold">{number}</span> {postfix}
-    </div>
-    <div className="text-center opacity-60 text-nowrap">{subtext}</div>
-  </Grid>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <Grid
+      size={{ xs: 12, md: 4 }}
+      className="bg-primary relative text-white rounded-lg px-16 pb-8 pt-16 space-y-2 cursor-default"
+    >
+      <div className="absolute top-4 left-4">{icon}</div>
+      <div className="flex items-center justify-center text-2xl font-bold">
+        + <span className="text-7xl font-bold">{number}</span> {postfix}
+      </div>
+      <div className="text-center opacity-60 text-nowrap">{t(subtext)}</div>
+    </Grid>
+  );
+};
 
 const Figures = () => {
   return (
-    <section className="container bg-black p-8 flex flex-col gap-8 items-center justify-center rounded-4xl">
+    <section
+      id="figures"
+      className="container bg-black p-8 flex flex-col gap-8 items-center justify-center rounded-4xl"
+    >
       <SectionNameRenderer name="A few figures" isDark />
-      <div className="uppercase text-6xl font-bold text-center text-white">
-        Why choose
-        <span className="text-primary mx-4">Remakeit</span>?
-      </div>
-      <div className="text-lg w-1/3 text-gray-400 font-semibold text-center">
-        RemakeIt is thousands of videos created, billions of views generated and
-        a large community of users who trust us every day
-      </div>
+      <TitleRenderer
+        isDark
+        title="Why choose RemakeIt ?"
+        highlightIndexes={[-2]}
+      />
+      <Subtext
+        text="RemakeIt is thousands of videos created, billions of views generated and a large community of users who trust us every day"
+        width="1/3"
+      />
       <Grid container spacing={2}>
         {cardData.map((card) => (
           <Card key={card.number} {...card} />
         ))}
       </Grid>
-      <Button
-        variant="contained"
-        className="!bg-primary rounded-full hover:bg-primary/60"
-        children={"Try it now"}
-      />
+      <CustomButton />
     </section>
   );
 };

@@ -38,7 +38,10 @@ const Footer = () => {
   ];
 
   return (
-    <div className="relative mx-auto text-white flex flex-col items-center justify-center gap-8 py-24 bg-primary">
+    <section
+      id="footer"
+      className="relative mx-auto text-white flex flex-col items-center justify-center gap-8 py-24 bg-primary"
+    >
       <div className="font-semibold text-2xl">
         {t("Create your next viral video")}
       </div>
@@ -82,7 +85,7 @@ const Footer = () => {
       <div className="absolute top-0 sm:text-[20vw] font-bold leading-40 tracking-tight select-none opacity-0 md:opacity-5">
         REMAKEIT
       </div>
-    </div>
+    </section>
   );
 };
 
