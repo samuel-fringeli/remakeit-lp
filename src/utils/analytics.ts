@@ -7,6 +7,7 @@ export const trackEvent = async (
 ) => {
   const properties = {
     ...eventProperties,
+    app_name: "landing_page",
     _event: eventLocation,
   };
 

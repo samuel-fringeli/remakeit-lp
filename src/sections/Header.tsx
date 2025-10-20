@@ -14,16 +14,15 @@ import RemakeItLogo from "../shared-components/RemakeItLogo";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CustomButton from "../shared-components/CustomButton";
 import { useTranslation } from "react-i18next";
+import { trackEvent } from "../utils/analytics";
+
+const signInUrl = "https://app.remakeit.io/sign-in";
+const signUpUrl = "https://app.remakeit.io/sign-up";
 
 const menuItems = ["Concept", "Services", "Pricing"];
-const languages = [
-  { code: "fr", flag: "🇫🇷" },
-  { code: "en", flag: "🇬🇧" },
-  { code: "es", flag: "🇪🇸" },
-];
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -31,6 +30,7 @@ const Header = () => {
 
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { pathname } = useLocation();
 
   const open = Boolean(anchorEl);
 
@@ -45,6 +45,37 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleMenuItemClick = (item: string) => {
+    // Track event
+    const eventName = item.toLowerCase() + "_nav_menu_clicked";
+    trackEvent(eventName, pathname);
+    
+    // Navigate to pricing page if Pricing item
+    if (item === "Pricing") {
+      navigate("/" + item.toLowerCase());
+    }
+    
+    // Scroll to section
+    handleScroll(item.toLowerCase());
+    
+    // Close mobile menu if open
+    handleMenuClose();
+  };
+
+  const handleSignIn = () => {
+    // Track sign in event
+    trackEvent("sign_in_clicked", pathname);
+    // Navigate to external sign in page
+    globalThis.location.href = signInUrl;
+  };
+
+  const handleSignUp = () => {
+    // Track sign up event
+    trackEvent("sign_up_clicked", pathname);
+    // Navigate to external sign up page
+    globalThis.location.href = signUpUrl;
   };
 
   useEffect(() => {
@@ -93,12 +124,7 @@ const Header = () => {
             <Button
               key={item}
               className="!text-inherit font-medium hover:text-gray-200"
-              onClick={() => {
-                if (item === "Pricing") {
-                  navigate("/" + item.toLowerCase());
-                }
-                handleScroll(item.toLowerCase());
-              }}
+              onClick={() => handleMenuItemClick(item)}
             >
               {item}
             </Button>
@@ -111,14 +137,26 @@ const Header = () => {
             className={isOnDarkSection ? "!text-white" : "!text-primary"}
           />
           {/* Login */}
-          <CustomButton isShadow={false} />
+          <CustomButton
+            isShadow={false}
+            onClick={handleSignIn}
+          />
 
           {/* Register */}
-          <CustomButton isShadow={false} variant="secondary" label="Register" />
+          <CustomButton
+            isShadow={false}
+            variant="secondary"
+            label="Register"
+            onClick={handleSignUp}
+          />
         </Box>
 
         {/* Mobile menu button */}
         <Box className="flex lg:hidden">
+          <LanguageSelector
+            className={isOnDarkSection ? "!text-white" : "!text-primary"}
+          />
+
           <IconButton onClick={handleMenuOpen} className="text-white">
             <FontAwesomeIcon icon={faBars} />
           </IconButton>
@@ -129,28 +167,24 @@ const Header = () => {
           anchorEl={anchorEl}
           open={open}
           onClose={handleMenuClose}
-          PaperProps={{
-            className:
-              "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white",
+          slotProps={{
+            paper: {
+              className:
+                "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white",
+            },
           }}
         >
           {menuItems.map((item) => (
-            <MenuItem key={item} onClick={handleMenuClose}>
+            <MenuItem key={item} onClick={() => handleMenuItemClick(item)}>
               {item}
             </MenuItem>
           ))}
-          <MenuItem>
-            <div className="flex gap-2">
-              {languages.map((lang) => (
-                <span key={lang.code}>{lang.flag}</span>
-              ))}
-            </div>
-          </MenuItem>
           <MenuItem>
             <Button
               fullWidth
               variant="contained"
               className="bg-indigo-600 text-white rounded-full"
+              onClick={handleSignIn}
             >
               {t("Login")}
             </Button>
@@ -160,6 +194,7 @@ const Header = () => {
               fullWidth
               variant="contained"
               className="bg-gray-100 text-gray-800 rounded-full"
+              onClick={handleSignUp}
             >
               {t("Register")}
             </Button>
