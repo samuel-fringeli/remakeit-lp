@@ -1,27 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import * as amplitude from '@amplitude/analytics-browser';
 import * as Experiment from '@amplitude/experiment-js-client';
 import { useLocation } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from 'app/store/hooks';
+import { setVariants, selectExperimentIsLoaded } from 'app/store/experimentSlice';
+import type { ExperimentVariant } from 'app/store/experimentSlice';
 
-interface Variant {
-	key: string;
-	payload: Record<string, unknown>;
-	value?: string;
-}
-
-interface UseAmplitudeReturn {
-	variants: Record<string, Variant>;
-	isLoading: boolean;
-	error: Error | null;
-}
-
-export const useAmplitude = (): UseAmplitudeReturn => {
+export const useAmplitude = (): void => {
 	const location = useLocation();
-	const [variants, setVariants] = useState<Record<string, Variant>>({});
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState<Error | null>(null);
+	const dispatch = useAppDispatch();
+	const isLoaded = useAppSelector(selectExperimentIsLoaded);
 
 	useEffect(() => {
+		// Skip if already loaded
+		if (isLoaded) return;
+
 		const initAmplitude = async () => {
 			try {
 				// Get device ID from URL parameters if available
@@ -54,7 +47,7 @@ export const useAmplitude = (): UseAmplitudeReturn => {
 
 				const fetchedVariants = experiment.all();
 
-				// Transform variants to match our store structure and keep variant value
+				// Transform variants to match our store structure
 				const transformedVariants = Object.keys(fetchedVariants ?? {}).reduce((acc, variantKey) => {
 					const variant = fetchedVariants[variantKey];
 
@@ -67,20 +60,17 @@ export const useAmplitude = (): UseAmplitudeReturn => {
 					}
 
 					return acc;
-				}, {} as Record<string, Variant>);
+				}, {} as Record<string, ExperimentVariant>);
 
-				setVariants(transformedVariants);
-				setIsLoading(false);
+				// Store variants in Redux
+				dispatch(setVariants(transformedVariants));
+				console.debug('Experiments fetched and stored:', transformedVariants);
 			} catch (err) {
 				console.error('Failed to initialize Amplitude or experiments:', err);
-				setError(err instanceof Error ? err : new Error('Unknown error'));
-				setIsLoading(false);
 			}
 		};
 
 		initAmplitude();
-	}, [location.search]);
-
-	return { variants, isLoading, error };
+	}, [location.search, dispatch, isLoaded]);
 };
 
