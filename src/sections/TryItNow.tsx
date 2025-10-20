@@ -17,7 +17,6 @@ const TryItNow = () => {
         <Subtext
           text={t("Join RemakeIt now and start generating your first content in one click. Register for free and test the platform")}
           align="left"
-          width="1/2"
         />
         <TryCustomButton />
       </div>

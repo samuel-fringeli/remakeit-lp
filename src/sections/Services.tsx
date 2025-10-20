@@ -81,7 +81,6 @@ const Services = () => {
 
       <Subtext
         text={t("Generate, improve, and publish your content in a single workflow. Choose a service below to find out the details and a short usage demo")}
-        width="1/3"
       />
 
       <Grid container spacing={2}>

@@ -69,7 +69,6 @@ const Figures = () => {
       />
       <Subtext
         text={t("RemakeIt is thousands of videos created, billions of views generated and a large community of users who trust us every day")}
-        width="1/3"
       />
       <Grid container spacing={2}>
         {cardData.map((card) => (

@@ -22,7 +22,6 @@ const Automation = () => {
 
       <Subtext
         text={t("With RemakeIt, you no longer need to open each application. Program or publish in one click, and your videos are automatically broadcast on your networks")}
-        width="2/5"
       />
 
       <img

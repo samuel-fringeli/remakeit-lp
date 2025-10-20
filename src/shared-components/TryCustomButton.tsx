@@ -15,7 +15,11 @@ const TryCustomButton = () => {
     globalThis.location.href = "https://app.remakeit.io/sign-up";
   };
 
-  return <CustomButton label={t("Try it now")} onClick={handleTryButton} />;
+  return (
+    <div className="inline-block">
+      <CustomButton label={t("Try it now")} onClick={handleTryButton} />
+    </div>
+  );
 };
 
 export default TryCustomButton;

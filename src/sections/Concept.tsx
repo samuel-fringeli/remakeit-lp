@@ -43,13 +43,19 @@ const Concept = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleFindVideo()}
-            slotProps={{ input: { className: "bg-white" } }}
+            slotProps={{ 
+              input: { 
+                className: "bg-white",
+                sx: { fontSize: { xs: '0.875rem', md: '1rem' } }
+              } 
+            }}
           />
           <Button
             variant="contained"
             className="!bg-primary rounded w-full disabled:!text-white/70 disabled:!bg-primary/50"
             onClick={handleFindVideo}
             disabled={!inputValue.trim()}
+            sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}
           >
             {t("Find video")}
           </Button>
@@ -105,7 +111,6 @@ const Concept = () => {
       <TitleRenderer title={t("Get your videos viral")} highlightIndexes={[-1]} />
       <Subtext
         text={t("In 3 simple steps, go from your idea to a viral video ready to post")}
-        width="1/3"
       />
 
       <div className="flex w-full gap-6 flex-col lg:flex-row justify-center">
@@ -117,8 +122,8 @@ const Concept = () => {
             <div className="w-full bg-primary/20 border border-primary/20 rounded-2xl p-4 h-60 flex items-center justify-center">
               {card.innerComponent}
             </div>
-            <div className="text-lg font-bold">{card.title}</div>
-            <div className="text-lg text-gray-400">{card.description}</div>
+            <div className="text-sm md:text-lg font-bold">{card.title}</div>
+            <div className="text-sm md:text-lg text-gray-400">{card.description}</div>
           </div>
         ))}
       </div>

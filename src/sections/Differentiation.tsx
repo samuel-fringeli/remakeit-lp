@@ -37,7 +37,6 @@ const Differentiation = () => {
       <TitleRenderer title={t("Why is RemakeIt Unique ?")} highlightIndexes={[-2]} />
       <Subtext
         text={t("RemakeIt doesn't just cut your videos: our AI creates real short content optimized for TikTok, Instagram, and YouTube Shorts")}
-        width="1/2"
       />
 
       <div className="flex w-full gap-6 flex-col lg:flex-row">

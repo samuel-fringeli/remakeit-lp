@@ -55,7 +55,7 @@ const PromptOrYoutube = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full gap-3">
+    <div className="flex flex-col items-center w-full gap-3 px-4">
       {/* Tabs */}
       <Tabs
         value={tabValue}

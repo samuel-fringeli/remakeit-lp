@@ -16,8 +16,8 @@ const ImageWithTitle = ({
 }) => {
   return (
     <div className="flex flex-col items-center space-y-8">
-      <div className="uppercase font-bold text-5xl">{title}</div>
-      <div className="aspect-video w-[450px] overflow-hidden rounded-xl">
+      <div className="uppercase font-bold text-3xl md:text-5xl">{title}</div>
+      <div className="aspect-video w-full max-w-[450px] overflow-hidden rounded-xl">
         <img
           src={source}
           alt={title}
@@ -44,7 +44,6 @@ const BeforeAfter = () => {
       />
       <Subtext
         text={t("With RemakeIt, your YouTube videos are given a second life. A single video can be transformed into several short clips, optimized for social networks")}
-        width="1/3"
       />
       <div className="w-full xl:flex space-y-8 lg:justify-center gap-16">
         <ImageWithTitle title={t("Before")} source={before} />

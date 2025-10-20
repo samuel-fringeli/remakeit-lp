@@ -16,7 +16,7 @@ const Faq = () => {
     {
       title: t("What is RemakeIt?"),
       description:
-        t("Remakeit is an artificial intelligence that makes it possible to quickly transform YouTube videos into viral and monetizable TikTok content, without requiring editing skills.m ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."),
+        t("Remakeit is an artificial intelligence that makes it possible to quickly transform YouTube videos into viral and monetizable TikTok content, without requiring editing skills."),
     },
     {
       title: t("Do I need video editing skills to use Remakeit?"),
@@ -51,7 +51,7 @@ const Faq = () => {
           title={t("Your questions, our responses")}
           highlightIndexes={[-1]}
         />
-        <Subtext text={t("Here are answers to the most frequently asked questions about RemakeIt. If you have others, our team is available to help you")} />
+        <Subtext width="1/2" text={t("Here are answers to the most frequently asked questions about RemakeIt. If you have others, our team is available to help you")} />
         <TryCustomButton />
       </div>
 
