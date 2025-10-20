@@ -101,10 +101,10 @@ const Concept = () => {
       id="concept"
       className="container flex flex-col space-y-8 items-center py-8"
     >
-      <SectionNameRenderer name="Concept" />
-      <TitleRenderer title="Get your videos viral" highlightIndexes={[-1]} />
+      <SectionNameRenderer name={t("Concept")} />
+      <TitleRenderer title={t("Get your videos viral")} highlightIndexes={[-1]} />
       <Subtext
-        text="In 3 simple steps, go from your idea to a viral video ready to post"
+        text={t("In 3 simple steps, go from your idea to a viral video ready to post")}
         width="1/3"
       />
 

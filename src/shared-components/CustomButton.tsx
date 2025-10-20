@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { Button } from "@mui/material";
 
 const CustomButton = ({
@@ -12,7 +11,6 @@ const CustomButton = ({
   variant?: "primary" | "secondary";
   onClick?: () => void;
 }) => {
-  const { t } = useTranslation();
   const basePurple = variant === "primary" ? "#5046e6" : "#ffffff";
   const lightPurple = variant === "primary" ? "#968CF2" : "#d2d2d2";
 
@@ -32,7 +30,7 @@ const CustomButton = ({
       }`}
       variant="contained"
     >
-      {t(label)}
+      {label}
     </Button>
   );
 };

@@ -14,7 +14,7 @@ const Subtext = ({
     <div
       className={`text-lg text-gray-400 font-semibold text-${align} w-${width}`}
     >
-      {t(text)}
+      {text}
     </div>
   );
 };

@@ -5,38 +5,38 @@ import {
   faXmarkCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import RemakeItLogo from "../shared-components/RemakeItLogo";
-import CustomButton from "../shared-components/CustomButton";
+import TryCustomButton from "../shared-components/TryCustomButton";
 import Subtext from "../shared-components/Subtext";
 import TitleRenderer from "../shared-components/TitleRenderer";
 import { useTranslation } from "react-i18next";
 
 const Differentiation = () => {
+  const { t } = useTranslation();
+
   const differences = {
     remakeit: [
-      "AI creates your video automatically",
-      "Programming and direct publishing",
-      "Optimizing formats (TikTok, Reels, Shorts)",
-      "Simple and fast interface, with a single click",
+      t("AI creates your video automatically"),
+      t("Programming and direct publishing"),
+      t("Optimizing formats (TikTok, Reels, Shorts)"),
+      t("Simple and fast interface, with a single click"),
     ],
     others: [
-      "Time-consuming manual cutting",
-      "No integrated multi-network publishing",
-      "Several tools required",
-      "Less efficient results",
+      t("Time-consuming manual cutting"),
+      t("No integrated multi-network publishing"),
+      t("Several tools required"),
+      t("Less efficient results"),
     ],
   };
-
-  const { t } = useTranslation();
 
   return (
     <section
       id="differentiation"
       className="container flex flex-col items-center my-8 gap-8 py-8"
     >
-      <SectionNameRenderer name="Differentiation" />
-      <TitleRenderer title="Why is RemakeIt Unique ?" highlightIndexes={[-2]} />
+      <SectionNameRenderer name={t("Differentiation")} />
+      <TitleRenderer title={t("Why is RemakeIt Unique ?")} highlightIndexes={[-2]} />
       <Subtext
-        text="RemakeIt doesn't just cut your videos: our AI creates real short content optimized for TikTok, Instagram, and YouTube Shorts"
+        text={t("RemakeIt doesn't just cut your videos: our AI creates real short content optimized for TikTok, Instagram, and YouTube Shorts")}
         width="1/2"
       />
 
@@ -71,7 +71,7 @@ const Differentiation = () => {
         </div>
       </div>
 
-      <CustomButton />
+      <TryCustomButton />
     </section>
   );
 };

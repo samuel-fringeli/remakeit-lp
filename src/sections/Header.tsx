@@ -22,17 +22,16 @@ import { trackEvent } from "../utils/analytics";
 const signInUrl = "https://app.remakeit.io/sign-in";
 const signUpUrl = "https://app.remakeit.io/sign-up";
 
-const menuItems = ["Concept", "Services", "Pricing"];
-
 const Header = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [isOnDarkSection, setIsOnDarkSection] = useState(false);
-
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isOnDarkSection, setIsOnDarkSection] = useState(false);
   const open = Boolean(anchorEl);
+
+  const menuItems = [t("Concept"), t("Services"), t("Pricing")];
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -139,6 +138,7 @@ const Header = () => {
           {/* Login */}
           <CustomButton
             isShadow={false}
+            label={t("Login")}
             onClick={handleSignIn}
           />
 
@@ -146,7 +146,7 @@ const Header = () => {
           <CustomButton
             isShadow={false}
             variant="secondary"
-            label="Register"
+            label={t("Register")}
             onClick={handleSignUp}
           />
         </Box>
