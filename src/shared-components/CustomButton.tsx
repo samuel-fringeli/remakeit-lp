@@ -17,14 +17,11 @@ const CustomButton = ({
   return (
     <Button
       onClick={onClick}
-      size="large"
       style={{
         background: `linear-gradient(120deg, ${basePurple},  ${lightPurple})`,
         ...(isShadow
           ? { boxShadow: "0 8px 40px -3px rgba(100, 50, 200, 0.7)" }
-          : { boxShadow: "none" }),
-        fontSize: '1.125rem',
-        padding: '12px 32px',
+          : {}),
       }}
       className={`!rounded-full !transition-all !duration-300 !ease-in-out ${
         variant === "primary" ? "!text-white" : "!text-primary"
@@ -32,7 +29,6 @@ const CustomButton = ({
         isShadow ? "hover:!shadow-[0_15px_60px_-6px_rgba(100,50,200,1)]" : ""
       }`}
       variant="contained"
-      disableElevation={!isShadow}
     >
       {label}
     </Button>

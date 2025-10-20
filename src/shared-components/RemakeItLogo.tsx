@@ -11,7 +11,7 @@ const RemakeItLogo = ({ className }: { className?: string }) => {
       }}
     >
       <LogoImage className="size-6" />
-      Remakeit
+      RemakeIt
     </div>
   );
 };

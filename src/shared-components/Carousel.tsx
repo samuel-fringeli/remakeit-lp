@@ -88,7 +88,7 @@ const Carousel = () => {
           return (
             <div
               key={i}
-              className="relative w-[140px] h-[240px] flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur-sm"
+              className="relative w-[80px] h-[137px] flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur-sm"
             >
               <img
                 src={v.src}

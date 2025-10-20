@@ -16,8 +16,8 @@ const Hero: React.FC = () => {
       style={{ background: `url(${bgImage})` }}
     >
       {/* CTA */}
-      <div className="flex items-center justify-center gap-2 text-sm bg-primary/80 w-fit px-2 py-1 text-white rounded-lg">
-        <img src={ctaIcon} alt="cta" className="size-6 text-yellow-500" />
+      <div className="flex items-center justify-center gap-2 text-xs bg-white/20 backdrop-blur-sm w-fit px-2 py-1 text-white rounded-lg border border-white/30">
+        <img src={ctaIcon} alt="cta" className="size-4 text-yellow-500" />
         {t("800K users")}
       </div>
 
