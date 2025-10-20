@@ -21,6 +21,8 @@ const LanguageSelector = ({ className }: { className?: string }) => {
     // Change language
     if (language !== lng) {
       i18n.changeLanguage(lng);
+      // Save to localStorage
+      localStorage.setItem("language", lng);
     }
   };
 
