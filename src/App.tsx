@@ -12,9 +12,11 @@ import Services from "./sections/Services";
 import TryItNow from "./sections/TryItNow";
 import Pricing from "./sections/Pricing";
 import { useLocation } from "react-router-dom";
+import { useAmplitude } from "./hooks/useAmplitude";
 
 function App() {
   const { pathname } = useLocation();
+  useAmplitude();
   return (
     <div className="h-screen overflow-auto">
       <Header />

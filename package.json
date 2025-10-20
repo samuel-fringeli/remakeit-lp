@@ -10,6 +10,8 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@amplitude/analytics-browser": "^2.25.0",
+    	"@amplitude/experiment-js-client": "^1.17.1",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
 		"@fortawesome/fontawesome-svg-core": "^7.1.0",
