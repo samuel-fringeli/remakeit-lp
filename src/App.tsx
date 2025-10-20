@@ -28,7 +28,7 @@ function App() {
   }, [pathname, navigate]);
 
   return (
-    <div className="h-screen overflow-auto">
+    <div className="h-screen">
       <Header />
       {pathname === "/pricing" ? <Pricing /> : <Hero />}
       <Concept />

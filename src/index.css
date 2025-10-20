@@ -24,26 +24,21 @@
   transform: rotateY(var(--angle)) scale(1.05);
 }
 
-/* Target the scrollbar */
-::-webkit-scrollbar {
-  width: 6px; /* small width */
-  height: 6px; /* for horizontal scrollbar */
-}
+/* Hide scrollbar on mobile only */
+@media (max-width: 1024px) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent; /* hide track */
-}
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+  }
 
-/* Thumb */
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3); /* subtle color */
-  border-radius: 6px; /* rounded corners */
-}
-
-/* Thumb hover */
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 0, 0, 0.5);
+  /* IE and Edge */
+  * {
+    -ms-overflow-style: none;
+  }
 }
 
 @layer utilities {
