@@ -5,8 +5,6 @@ import {
   Box,
   Button,
   IconButton,
-  Menu,
-  MenuItem,
   Toolbar,
 } from "@mui/material";
 import LanguageSelector from "../shared-components/LanguageSelector";
@@ -27,17 +25,18 @@ const Header = () => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isOnDarkSection, setIsOnDarkSection] = useState(false);
-  const open = Boolean(anchorEl);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuItems = [t("Concept"), t("Services"), t("Pricing")];
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  const handleMenuClose = () => setAnchorEl(null);
+  const handleMenuClose = () => {
+    setMobileMenuOpen(false);
+  };
 
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
@@ -59,7 +58,7 @@ const Header = () => {
     // Scroll to section
     handleScroll(item.toLowerCase());
     
-    // Close mobile menu if open
+    // Close mobile menu
     handleMenuClose();
   };
 
@@ -87,7 +86,7 @@ const Header = () => {
       },
       {
         root: null,
-        threshold: 0.5,
+        threshold: 0.05,
       }
     );
 
@@ -99,24 +98,24 @@ const Header = () => {
     <AppBar
       id="header"
       position="static"
-      className={`!shadow-none py-2 z-20 !bg-transparent ${
-        isOnDarkSection ? "!text-white" : "!text-primary"
-      }`}
+      className={`!shadow-none py-2 z-20 !bg-transparent transition-colors duration-200 !pb-0 ${
+        isOnDarkSection ? "!text-primary" : "!text-white"
+      } backdrop-blur-lg`}
       sx={{ position: "fixed", top: 0 }}
     >
       <Toolbar className="flex justify-between items-center max-w-7xl mx-auto w-full px-4">
         {/* Left: Logo */}
         <RemakeItLogo
-          className={isOnDarkSection ? "text-white" : "text-primary"}
+          className={`transition-colors duration-200 ${isOnDarkSection ? "text-white" : "text-primary"}`}
         />
 
         {/* Center menu (desktop) */}
         <Box
           className={clsx(
             isOnDarkSection
-              ? "bg-white/10 backdrop-blur-lg border border-white/20"
-              : "bg-primary/10 backdrop-blur-lg border border-primary/20",
-            "hidden lg:absolute right-1/2 translate-x-1/2 w-fit lg:flex items-center gap-6 rounded-full px-6 py-2"
+              ? "bg-white/60 backdrop-blur-lg border border-white/20"
+              : "bg-primary/60 backdrop-blur-lg border border-primary/20",
+            "hidden lg:absolute right-1/2 translate-x-1/2 w-fit lg:flex items-center gap-6 rounded-full px-6 py-2 transition-all duration-200"
           )}
         >
           {menuItems.map((item) => (
@@ -133,7 +132,7 @@ const Header = () => {
         {/* Right side:  buttons */}
         <Box className="hidden lg:flex items-center gap-3">
           <LanguageSelector
-            className={isOnDarkSection ? "!text-white" : "!text-primary"}
+            className={`transition-colors duration-200 ${isOnDarkSection ? "!text-white" : "!text-primary"}`}
           />
           {/* Login */}
           <CustomButton
@@ -154,53 +153,59 @@ const Header = () => {
         {/* Mobile menu button */}
         <Box className="flex lg:hidden">
           <LanguageSelector
-            className={isOnDarkSection ? "!text-white" : "!text-primary"}
+            className={`transition-colors duration-200 ${isOnDarkSection ? "!text-white" : "!text-primary"}`}
           />
 
-          <IconButton onClick={handleMenuOpen} className="text-white">
-            <FontAwesomeIcon icon={faBars} />
+          <IconButton 
+            onClick={handleMenuToggle}
+            className="transition-colors duration-200"
+            aria-controls="navbar-menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            <FontAwesomeIcon icon={faBars} className={`${isOnDarkSection ? "text-white" : "text-primary"}`} />
           </IconButton>
         </Box>
-
-        {/* Mobile menu drawer */}
-        <Menu
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleMenuClose}
-          slotProps={{
-            paper: {
-              className:
-                "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white",
-            },
-          }}
-        >
-          {menuItems.map((item) => (
-            <MenuItem key={item} onClick={() => handleMenuItemClick(item)}>
-              {item}
-            </MenuItem>
-          ))}
-          <MenuItem>
-            <Button
-              fullWidth
-              variant="contained"
-              className="bg-indigo-600 text-white rounded-full"
-              onClick={handleSignIn}
-            >
-              {t("Login")}
-            </Button>
-          </MenuItem>
-          <MenuItem>
-            <Button
-              fullWidth
-              variant="contained"
-              className="bg-gray-100 text-gray-800 rounded-full"
-              onClick={handleSignUp}
-            >
-              {t("Register")}
-            </Button>
-          </MenuItem>
-        </Menu>
       </Toolbar>
+
+      {/* Mobile collapsible menu */}
+      <div 
+        id="navbar-menu"
+        className={`${
+          mobileMenuOpen ? 'max-h-126 opacity-100' : 'max-h-0 opacity-0'
+        } w-full lg:hidden transition-all duration-300 ease-in-out overflow-hidden`}
+      >
+        <ul className="flex flex-col px-4 pt-2 pb-4 border-t border-gray-200 bg-white/75 backdrop-blur-lg">
+          {menuItems.map((item) => (
+            <li key={item}>
+              <button
+                onClick={() => handleMenuItemClick(item)}
+                className="block w-full text-left py-3 px-4 text-sm text-primary rounded-lg hover:bg-primary/10 transition-colors"
+              >
+                {item}
+              </button>
+            </li>
+          ))}
+          <li className="mt-2 flex gap-2 justify-center px-4">
+            <CustomButton
+              isShadow={false}
+              label={t("Login")}
+              onClick={() => {
+                handleSignIn();
+                handleMenuClose();
+              }}
+            />
+            <CustomButton
+              isShadow={false}
+              variant="secondary"
+              label={t("Register")}
+              onClick={() => {
+                handleSignUp();
+                handleMenuClose();
+              }}
+            />
+          </li>
+        </ul>
+      </div>
     </AppBar>
   );
 };
