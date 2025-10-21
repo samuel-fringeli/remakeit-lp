@@ -1,5 +1,5 @@
 {
-	"name": "remakeit-frontend-v2.0",
+	"name": "remakeit-lp",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -12,6 +12,8 @@
 	"dependencies": {
 		"@amplitude/analytics-browser": "^2.25.0",
 		"@amplitude/experiment-js-client": "^1.17.1",
+		"@aws-amplify/ui-react": "^6.5.5",
+		"aws-amplify": "^6.6.6",
 		"@emotion/react": "^11.14.0",
 		"@emotion/styled": "^11.14.1",
 		"@fortawesome/fontawesome-svg-core": "^7.1.0",
@@ -36,6 +38,11 @@
 		"tailwindcss": "^4.1.14"
 	},
 	"devDependencies": {
+		"@aws-amplify/backend": "^1.5.1",
+		"@aws-amplify/backend-cli": "^1.3.0",
+		"aws-cdk": "^2",
+		"aws-cdk-lib": "^2",
+		"constructs": "^10.3.0",
 		"@eslint/js": "^9.36.0",
 		"@types/node": "^24.6.0",
 		"@types/react": "^19.1.16",
