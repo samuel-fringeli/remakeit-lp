@@ -41,7 +41,15 @@ const Header = () => {
   const handleScroll = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const headerHeight = 50;
+      console.log(headerHeight);
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 
@@ -63,10 +71,13 @@ const Header = () => {
       handleScroll(item.toLowerCase());
     } else {
       navigate("/");
-      // Wait for navigation before scrolling
+      // Wait for navigation and hero section to render before scrolling
       setTimeout(() => {
-        handleScroll(item.toLowerCase());
-      }, 100);
+        // Use requestAnimationFrame to ensure DOM is fully updated
+        requestAnimationFrame(() => {
+          handleScroll(item.toLowerCase());
+        });
+      }, 500);
     }
     
     // Close mobile menu

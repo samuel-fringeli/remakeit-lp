@@ -17,7 +17,7 @@ const TryCustomButton = () => {
 
   return (
     <div className="inline-block">
-      <CustomButton label={t("Try it now")} onClick={handleTryButton} />
+      <CustomButton label={t("Try it now")} size="large" onClick={handleTryButton} />
     </div>
   );
 };
