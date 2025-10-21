@@ -50,13 +50,24 @@ const Header = () => {
     const eventName = item.toLowerCase() + "_nav_menu_clicked";
     trackEvent(eventName, pathname);
     
-    // Navigate to pricing page if Pricing item
-    if (item === "Pricing") {
-      navigate("/" + item.toLowerCase());
+    // Navigate to pricing page if Pricing item (compare with translation)
+    if (item === t("Pricing")) {
+      navigate("/pricing");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      handleMenuClose();
+      return;
     }
     
-    // Scroll to section
-    handleScroll(item.toLowerCase());
+    // For other items, navigate to home and scroll to section
+    if (pathname === "/") {
+      handleScroll(item.toLowerCase());
+    } else {
+      navigate("/");
+      // Wait for navigation before scrolling
+      setTimeout(() => {
+        handleScroll(item.toLowerCase());
+      }, 100);
+    }
     
     // Close mobile menu
     handleMenuClose();
@@ -77,8 +88,14 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const darkSection = document.getElementById("hero");
-    if (!darkSection) return;
+    // Observe either hero or pricing section depending on current page
+    const darkSectionId = pathname === "/pricing" ? "pricing" : "hero";
+    const darkSection = document.getElementById(darkSectionId);
+    
+    if (!darkSection) {
+      setIsOnDarkSection(false);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -92,7 +109,7 @@ const Header = () => {
 
     observer.observe(darkSection);
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
   return (
     <AppBar
