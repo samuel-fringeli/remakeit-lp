@@ -28,10 +28,11 @@ const Hero: React.FC = () => {
       {/* Title */}
       <HeroText />
 
-      <Carousel />
-
-      {/* prompt input */}
-      <PromptOrYoutube />
+      {/* Desktop: Prompt then Carousel, Mobile: Carousel then Prompt */}
+      <div className="w-full flex flex-col md:flex-col-reverse gap-8 items-center">
+        <Carousel />
+        <PromptOrYoutube />
+      </div>
     </motion.section>
   );
 };

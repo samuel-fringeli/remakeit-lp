@@ -44,7 +44,7 @@ const videos = [
 
 // We need to render MORE items than the original array length to cover the viewport
 // and allow for the seamless transition. We'll render 15 items (3 sets of 5, or 2.5 sets of 6).
-const ITEMS_TO_RENDER = 21;
+const ITEMS_TO_RENDER = 45;
 const originalLength = videos.length; // 6
 
 const Carousel = () => {
@@ -88,7 +88,7 @@ const Carousel = () => {
           return (
             <div
               key={i}
-              className="relative w-[80px] h-[137px] flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur-sm"
+              className="relative w-[80px] h-[137px] md:w-[140px] md:h-[240px] flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur-sm"
             >
               <img
                 src={v.src}
