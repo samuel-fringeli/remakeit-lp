@@ -2,24 +2,7 @@ import { useState } from "react";
 import bgImage from "../assets/hero-bg.svg";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-
-// const plans = [
-//   {
-//     label: "Creator",
-//     monthlyPrice: 22,
-//     annualPrice: 19,
-//     annualTotalPrice: 228,
-//     featuresAvailable: [
-//       "3600 Credits Remakeit Shorts",
-//       "720 Text to Speech",
-//       "+3 background music tracks",
-//       "Prompt to Viral video",
-//     ],
-//     featuresUnavailable: ["Access to private support", "Automatic publishing"],
-//   },
-// ];
+import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 const pricingPlans = [
   {
@@ -92,16 +75,19 @@ const Pricing = () => {
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
   return (
-    <section
+    <motion.section
       id="pricing"
       style={{ background: `url(${bgImage})` }}
-      className="pt-24 pb-8 flex flex-col gap-8 items-center"
+      className="pt-24 pb-8 px-4 flex flex-col gap-8 items-center"
+      initial={{ y: 10 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="text-6xl text-white font-bold text-center uppercase">
+      <div className="md:text-6xl text-4xl text-white font-bold text-center uppercase">
         Invest in your virality
       </div>
 
-      <div className="text-lg w-1/3 text-white/50 font-semibold text-center">
+      <div className="md:text-lg text-sm text-white/50 font-semibold text-center">
         Whether you are a beginner creator or a seasoned professional, choose
         the plan that fits your needs. No commitment, cancel whenever you want
       </div>
@@ -205,7 +191,7 @@ const Pricing = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

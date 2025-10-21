@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 
 const TitleRenderer = ({
   title,
@@ -14,8 +13,7 @@ const TitleRenderer = ({
   width?: string;
   isDark?: boolean;
 }) => {
-  const { t } = useTranslation();
-  const textToRender = t(title);
+  const textToRender = title;
 
   const words = useMemo(() => textToRender.split(" "), [textToRender]);
 
@@ -26,7 +24,7 @@ const TitleRenderer = ({
 
   return (
     <div
-      className={`flex gap-4 text-6xl max-w-[${width}] font-bold uppercase flex-wrap justify-${align} ${
+      className={`flex gap-2 md:gap-4 text-3xl md:text-6xl max-w-[${width}] font-bold uppercase flex-wrap justify-${align} ${
         isDark ? "!text-white" : ""
       }`}
       style={{ maxWidth: width }}

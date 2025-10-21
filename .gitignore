@@ -23,9 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 
-
-# Package lock file
-package-lock.json
-
 # prettier file
 .prettierrc

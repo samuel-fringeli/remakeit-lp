@@ -11,12 +11,24 @@ import Header from "./sections/Header";
 import Services from "./sections/Services";
 import TryItNow from "./sections/TryItNow";
 import Pricing from "./sections/Pricing";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAmplitude } from "./hooks/useAmplitude";
+import { useEffect } from "react";
 
 function App() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  useAmplitude();
+
+  useEffect(() => {
+    // Redirect to home if route is not / or /pricing
+    if (pathname !== "/" && pathname !== "/pricing") {
+      navigate("/", { replace: true });
+    }
+  }, [pathname, navigate]);
+
   return (
-    <div className="h-screen overflow-auto">
+    <div className="h-screen">
       <Header />
       {pathname === "/pricing" ? <Pricing /> : <Hero />}
       <Concept />

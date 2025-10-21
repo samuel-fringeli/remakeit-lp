@@ -3,10 +3,14 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faDiscord } from "@fortawesome/free-brands-svg-icons";
 import RemakeItLogo from "../shared-components/RemakeItLogo";
+import { trackEvent } from "../utils/analytics";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const { t } = useTranslation();
-
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  
   const footerMenus = [
     {
       title: t("Help"),
@@ -37,6 +41,22 @@ const Footer = () => {
     },
   ];
 
+  const handleGetStartedNow = () => {
+    // Track event
+    trackEvent("get_started_now_clicked", pathname);
+    
+    // If already on home page, just scroll to top
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // Navigate to home first, then scroll to top
+      navigate("/");
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 100);
+    }
+  };
+
   return (
     <section
       id="footer"
@@ -51,6 +71,7 @@ const Footer = () => {
       <Button
         className="!rounded-full !bg-linear-to-b from-black/20 to-black/0 hover:bg-linear-to-b hover:from-white/20 hover:to-white/0 !text-white !px-4 z-10"
         size="large"
+        onClick={handleGetStartedNow}
       >
         <span className="text-lg">{t("Get started now")}</span>
       </Button>
