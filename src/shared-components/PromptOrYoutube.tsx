@@ -41,7 +41,7 @@ const PromptOrYoutube = () => {
     } else {
       // Treat as prompt
       trackEvent("generate_from_prompt_clicked", pathname, { prompt: inputValue });
-      globalThis.location.href = `https://app.remakeit.io/gen/videos/new?idea=${encodedValue}`;
+      globalThis.location.href = `https://app.remakeit.io/prompt-to-video/videos/new?prompt=${encodedValue}`;
     }
   };
 
