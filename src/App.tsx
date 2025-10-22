@@ -11,6 +11,7 @@ import Header from "./sections/Header";
 import Services from "./sections/Services";
 import TryItNow from "./sections/TryItNow";
 import Pricing from "./sections/Pricing";
+import MobileBottomSnackbar from "./shared-components/MobileBottomSnackbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAmplitude } from "./hooks/useAmplitude";
 import { useEffect } from "react";
@@ -40,6 +41,7 @@ function App() {
       <Faq />
       <TryItNow />
       <Footer />
+      <MobileBottomSnackbar />
     </div>
   );
 }

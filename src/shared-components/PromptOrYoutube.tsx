@@ -50,7 +50,7 @@ const PromptOrYoutube = () => {
   return (
     <div className="flex flex-col items-center w-full gap-3 px-4">
       {/* Input Area */}
-      <div className="bg-primary/20 w-full lg:w-2/3 rounded-lg p-2 md:p-4 flex flex-col gap-2">
+      <div id="generate-tiktok-section" className="bg-primary/20 w-full lg:w-2/3 rounded-lg p-2 md:p-4 flex flex-col gap-2">
         <GradientOutline borderRadius="rounded-md">
           <div className="relative w-full bg-white rounded-md">
             <TextField
