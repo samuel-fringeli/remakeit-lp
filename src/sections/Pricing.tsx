@@ -1,194 +1,202 @@
 import { useState } from "react";
-import bgImage from "../assets/hero-bg.svg";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
+import GradientOutline from "../shared-components/GradientOutline";
 
 const pricingPlans = [
   {
-    label: "Creator",
+    labelKey: "Creator",
     monthlyPrice: 22,
     annualPrice: 228,
-    badge: null,
+    badgeKey: null,
     featuresAvailable: [
-      "3600 Credits Remakeit Shorts",
-      "720 Text to Speech",
-      "+3 background music tracks",
-      "Prompt to Viral video",
+      { count: "3600", key: "Credits Remakeit Shorts" },
+      { count: "720", key: "Text to Speech" },
+      { count: "+3", key: "background music tracks" },
+      { count: "", key: "Prompt to Viral video" },
     ],
     featuresUnavailable: [
       "Access to private support",
       "Automatic publishing ⚡",
     ],
-    buttonText: "Choose the package",
-    theme: {
-      bg: "bg-primary/20", // light violet
-      border: "border-white/30",
-      accent: "text-white",
-    },
+    buttonTextKey: "Choose the package",
+    isMostPopular: false,
   },
   {
-    label: "Expert",
+    labelKey: "Expert",
     monthlyPrice: 39,
     annualPrice: 420,
-    badge: "Most Popular",
+    badgeKey: "Most Popular",
     featuresAvailable: [
-      "7200 Credits Remakeit Shorts",
-      "1400 Text to Speech",
-      "All background music",
-      "Prompt to Viral video",
-      "Access to private support",
-      "Automatic publishing ⚡",
+      { count: "7200", key: "Credits Remakeit Shorts" },
+      { count: "1400", key: "Text to Speech" },
+      { count: "", key: "All background music" },
+      { count: "", key: "Prompt to Viral video" },
+      { count: "", key: "Access to private support" },
+      { count: "", key: "Automatic publishing ⚡" },
     ],
     featuresUnavailable: [],
-    buttonText: "Choose the package",
-    theme: {
-      bg: "bg-white/60",
-      border: "border-[#5f5bff]/40",
-      accent: "!text-black",
-    },
+    buttonTextKey: "Choose the package",
+    isMostPopular: true,
   },
   {
-    label: "Professional",
+    labelKey: "Professional",
     monthlyPrice: 89,
     annualPrice: 900,
-    badge: null,
+    badgeKey: null,
     featuresAvailable: [
-      "Unlimited Remakeit Shorts",
-      "Unlimited Text to Speech",
-      "All background music",
-      "Prompt to Viral video",
-      "Access to private support",
-      "Automatic publishing ⚡",
+      { count: "", key: "Unlimited Remakeit Shorts" },
+      { count: "", key: "Unlimited Text to Speech" },
+      { count: "", key: "All background music" },
+      { count: "", key: "Prompt to Viral video" },
+      { count: "", key: "Access to private support" },
+      { count: "", key: "Automatic publishing ⚡" },
     ],
     featuresUnavailable: [],
-    buttonText: "Choose the package",
-    theme: {
-      bg: "bg-primary/20", // light violet
-      border: "border-white/30",
-      accent: "text-white",
-    },
+    buttonTextKey: "Choose the package",
+    isMostPopular: false,
   },
 ];
 
 const Pricing = () => {
+  const { t } = useTranslation();
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
   return (
     <motion.section
       id="pricing"
-      style={{ background: `url(${bgImage})` }}
-      className="pt-24 pb-8 px-4 flex flex-col gap-8 items-center"
+      className="relative pt-24 pb-8 px-4 flex flex-col gap-8 items-center bg-white overflow-hidden"
       initial={{ y: 10 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="md:text-6xl text-4xl text-white font-bold text-center uppercase">
-        Invest in your virality
+      {/* Primary color cloud background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/20 md:top-1/12 left-1/2 -translate-x-1/2 w-full md:w-[1200px] h-[100px] md:h-[300px] bg-primary opacity-60 md:opacity-40 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="md:text-lg text-sm text-white/50 font-semibold text-center">
-        Whether you are a beginner creator or a seasoned professional, choose
-        the plan that fits your needs. No commitment, cancel whenever you want
-      </div>
-
-      <div className="flex flex-col items-center justify-center">
-        {/* Billing Toggle */}
-        <div className="flex items-center bg-white/20 backdrop-blur-md border border-white/30 rounded-full p-1 mb-10">
-          <button
-            className={`px-6 py-2 rounded-full transition-all ${
-              billing === "monthly"
-                ? "bg-white text-primary font-semibold"
-                : "text-white"
-            }`}
-            onClick={() => setBilling("monthly")}
-          >
-            Monthly
-          </button>
-          <button
-            className={`px-6 py-2 rounded-full transition-all ${
-              billing === "yearly"
-                ? "bg-white text-primary font-semibold"
-                : "text-white"
-            }`}
-            onClick={() => setBilling("yearly")}
-          >
-            Yearly <span className="opacity-70">-15%</span>
-          </button>
+      <div className="relative z-10 flex flex-col gap-8 items-center w-full">
+        <div className="md:text-6xl text-4xl text-gray-900 font-bold text-center uppercase">
+          {t("Invest in your virality")}
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-6 md:px-16 w-full max-w-6xl">
-          {pricingPlans.map((plan, index) => (
-            <motion.div
-              key={index}
-              className={`relative rounded-3xl border ${plan.theme.border} ${plan.theme.bg} p-8 flex flex-col justify-between shadow-xl hover:scale-105 transition-transform ${plan.theme.accent}`}
-              whileHover={{ y: -5 }}
+        <div className="hidden md:block md:text-lg text-sm text-gray-600 font-semibold text-center max-w-3xl">
+          {t("Whether you are a beginner creator or a seasoned professional, choose the plan that fits your needs. No commitment, cancel whenever you want")}
+        </div>
+
+        <div className="flex flex-col items-center justify-center w-full">
+          {/* Billing Toggle */}
+          <div className="flex items-center bg-gray-100 border border-gray-200 rounded-full p-1 mb-10">
+            <button
+              className={`px-6 py-2 rounded-full transition-all ${
+                billing === "monthly"
+                  ? "bg-primary text-white font-semibold"
+                  : "text-gray-600"
+              }`}
+              onClick={() => setBilling("monthly")}
             >
-              {/* Badge */}
-              {plan.badge && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-sm px-4 py-1 rounded-full shadow-lg">
-                  {plan.badge}
-                </div>
-              )}
+              {t("Monthly")}
+            </button>
+            <button
+              className={`px-6 py-2 rounded-full transition-all ${
+                billing === "yearly"
+                  ? "bg-primary text-white font-semibold"
+                  : "text-gray-600"
+              }`}
+              onClick={() => setBilling("yearly")}
+            >
+              {t("Yearly")} <span className="opacity-70">-15%</span>
+            </button>
+          </div>
 
-              {/* Header */}
-              <div>
-                <h3 className="text-lg font-semibold mb-3">{plan.label}</h3>
-                <div className="text-4xl font-bold mb-1 flex items-center gap-2">
-                  {billing === "monthly"
-                    ? `${plan.monthlyPrice}€`
-                    : `${Math.round(plan.annualPrice / 12)}€`}
-
-                  <div
-                    className={`${plan.theme.accent}/80 font-medium !text-xs`}
-                  >
-                    <div> per month</div>
-                    {billing === "yearly" && (
-                      <div>({plan.annualPrice}€ per year)</div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Features */}
-              <ul className="mt-6 flex-1 space-y-2">
-                {plan.featuresAvailable.map((f, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    <span
-                      className={
-                        plan.label === "Expert"
-                          ? "text-primary/60"
-                          : "text-white"
-                      }
-                    >
-                      <FontAwesomeIcon icon={faCircleCheck} />
-                    </span>{" "}
-                    {f}
-                  </li>
-                ))}
-                {plan.featuresUnavailable.map((f, i) => (
-                  <li key={i} className="flex items-center gap-2 line-through">
-                    <span className="text-red-600 bg-white rounded-full size-3 flex items-center">
-                      <FontAwesomeIcon icon={faCircleXmark} />
-                    </span>{" "}
-                    <span className="opacity-50">{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Button */}
-              <button
-                className={`mt-8 py-3 rounded-xl font-semibold transition-all ${
-                  plan.label === "Expert"
-                    ? "bg-[#5f5bff] text-white"
-                    : "bg-white text-[#5f5bff]"
-                }`}
+          {/* Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-6 md:px-16 w-full max-w-6xl">
+            {pricingPlans.map((plan) => (
+              <motion.div
+                key={plan.labelKey}
+                whileHover={{ y: -5, scale: 1.05 }}
+                transition={{ duration: 0.3 }}
               >
-                {plan.buttonText}
-              </button>
-            </motion.div>
-          ))}
+                <GradientOutline
+                  borderRadius="rounded-3xl"
+                  borderWidth="p-1"
+                >
+                  <div
+                    className={`relative rounded-3xl p-8 flex flex-col justify-between shadow-xl ${
+                      plan.isMostPopular
+                        ? "bg-[#e1dff7] text-gray-900"
+                        : "bg-white text-gray-900"
+                    }`}
+                    style={{ minHeight: "500px" }}
+                  >
+                  {/* Badge */}
+                  {plan.badgeKey && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white text-sm px-4 py-1 rounded-full shadow-lg">
+                      {t(plan.badgeKey)}
+                    </div>
+                  )}
+
+                  {/* Header */}
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3">{t(plan.labelKey)}</h3>
+                    <div className="text-4xl font-bold mb-1 flex items-center gap-2">
+                      {billing === "monthly"
+                        ? `${plan.monthlyPrice}€`
+                        : `${Math.round(plan.annualPrice / 12)}€`}
+
+                      <div
+                        className={`font-medium !text-xs "text-gray-600"`}
+                      >
+                        <div>{t("per month")}</div>
+                        {billing === "yearly" && (
+                          <div>({plan.annualPrice}€ {t("per year")})</div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <ul className="mt-6 flex-1 space-y-2">
+                    {plan.featuresAvailable.map((f) => (
+                      <li key={f.key} className="flex items-center gap-2">
+                        <span
+                          className="text-primary"
+                        >
+                          <FontAwesomeIcon icon={faCircleCheck} />
+                        </span>{" "}
+                        <span>
+                          {f.count && <strong>{f.count} </strong>}
+                          {t(f.key)}
+                        </span>
+                      </li>
+                    ))}
+                    {plan.featuresUnavailable.map((f) => (
+                      <li key={f} className="flex items-center gap-2 line-through">
+                        <span className="text-red-500">
+                          <FontAwesomeIcon icon={faCircleXmark} />
+                        </span>{" "}
+                        <span className="opacity-50">{t(f)}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Button */}
+                  <button
+                    className={`mt-8 py-3 rounded-xl font-semibold transition-all ${
+                      plan.isMostPopular
+                        ? "bg-white text-primary hover:bg-gray-100"
+                        : "bg-primary text-white hover:bg-primary/90"
+                    }`}
+                  >
+                    {t(plan.buttonTextKey)}
+                  </button>
+                  </div>
+                </GradientOutline>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </motion.section>
