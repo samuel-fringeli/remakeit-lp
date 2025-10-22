@@ -3,7 +3,6 @@ import { a, defineData } from "@aws-amplify/backend";
 const schema = a.schema({
   TrackingParams: a
     .model({
-      id: a.string(),
       content: a.string(),
     })
     .authorization((allow) => [allow.guest().to(['read'])]),
