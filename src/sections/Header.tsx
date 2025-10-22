@@ -105,17 +105,9 @@ const Header = () => {
     >
       <Toolbar className="flex justify-between items-center max-w-7xl mx-auto w-full px-4">
         {/* Left: Logo */}
-        <div 
-          onClick={() => {
-            navigate("/");
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            handleMenuClose();
-          }}
-        >
-          <RemakeItLogo
-            className="md:!text-primary !text-gray-900"
-          />
-        </div>
+        <RemakeItLogo
+          className="md:!text-primary !text-gray-900"
+        />
 
         {/* Center menu (desktop) */}
         <Box

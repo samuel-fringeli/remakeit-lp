@@ -8,13 +8,6 @@ const RemakeItLogo = ({ className }: { className?: string }) => {
     navigate("/");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleLogoClick();
-    }
-  };
   
   return (
     <button
