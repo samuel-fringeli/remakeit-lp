@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import GradientOutline from "../shared-components/GradientOutline";
+import { trackEvent } from "../utils/analytics";
+import { useLocation } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const pricingPlans = [
   {
@@ -62,7 +65,16 @@ const pricingPlans = [
 
 const Pricing = () => {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
+
+  const handleChoosePackage = () => {
+    // Track event
+    trackEvent("choose_package_clicked", pathname);
+
+    // Navigate to app sign-up
+    globalThis.location.href = "https://app.remakeit.io/pricing-auth";
+  };
 
   return (
     <motion.section
@@ -183,15 +195,19 @@ const Pricing = () => {
                   </ul>
 
                   {/* Button */}
-                  <button
-                    className={`mt-8 py-3 rounded-xl font-semibold transition-all ${
+                  <Button
+                    fullWidth
+                    disableElevation
+                    variant="contained"
+                    onClick={handleChoosePackage}
+                    className={`!mt-8 !py-3 !rounded-xl !font-semibold !transition-all ${
                       plan.isMostPopular
-                        ? "bg-white text-primary hover:bg-gray-100"
-                        : "bg-primary text-white hover:bg-primary/90"
+                        ? "!bg-white !text-primary hover:!bg-gray-100"
+                        : "!bg-primary !text-white hover:!bg-primary/90"
                     }`}
                   >
                     {t(plan.buttonTextKey)}
-                  </button>
+                  </Button>
                   </div>
                 </GradientOutline>
               </motion.div>

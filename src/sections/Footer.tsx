@@ -25,7 +25,7 @@ const Footer = () => {
       links: [
         { label: t("Commercial proposals"), url: "#" },
         { label: t("Affiliation"), url: "#" },
-        { label: t("Pricing"), url: "#" },
+        { label: t("Pricing"), url: "/pricing" },
       ],
     },
     {
