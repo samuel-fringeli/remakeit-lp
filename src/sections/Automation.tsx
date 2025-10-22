@@ -28,7 +28,7 @@ const Automation = () => {
         draggable={false}
         src={remakeItToOthers}
         alt="platforms"
-        className="overflow-auto max-w-3/4 object-cover h-fit"
+        className="overflow-auto md:max-w-3/4 object-cover"
       />
 
       <TryCustomButton />
