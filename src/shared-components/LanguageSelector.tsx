@@ -33,7 +33,7 @@ const LanguageSelector = ({ className }: { className?: string }) => {
           key={lng}
           onClick={() => handleLanguageChange(lng)}
           className={`!p-1 !text-xs !min-w-0 ${className}  ${
-            language === lng ? "!border border-white rounded-full" : ""
+            language === lng ? "!border border-white rounded-lg" : ""
           }`}
         >
           {lng.toUpperCase()}
