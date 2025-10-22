@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
+import { addLangParam } from "../utils/urlHelper";
 
 const MobileBottomSnackbar: React.FC = () => {
   const { t } = useTranslation();
@@ -23,7 +24,7 @@ const MobileBottomSnackbar: React.FC = () => {
   }, []);
 
   const handleClick = () => {
-    window.open("https://app.remakeit.io/gen/videos/new", "_blank");
+    window.open(addLangParam("https://app.remakeit.io/gen/videos/new"), "_blank");
   };
 
   return (

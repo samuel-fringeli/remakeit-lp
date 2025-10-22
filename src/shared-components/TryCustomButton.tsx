@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { trackEvent } from "../utils/analytics";
+import { addLangParam } from "../utils/urlHelper";
 import CustomButton from "./CustomButton";
 
 const TryCustomButton = () => {
@@ -12,7 +13,7 @@ const TryCustomButton = () => {
     trackEvent("try_it_now_clicked", pathname);
     
     // Navigate to app sign-up
-    globalThis.location.href = "https://app.remakeit.io/sign-up";
+    globalThis.location.href = addLangParam("https://app.remakeit.io/sign-up");
   };
 
   return (

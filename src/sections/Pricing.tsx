@@ -5,6 +5,7 @@ import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import { useTranslation } from "react-i18next";
 import GradientOutline from "../shared-components/GradientOutline";
 import { trackEvent } from "../utils/analytics";
+import { addLangParam } from "../utils/urlHelper";
 import { useLocation } from "react-router-dom";
 import { Button } from "@mui/material";
 
@@ -73,7 +74,7 @@ const Pricing = () => {
     trackEvent("choose_package_clicked", pathname);
 
     // Navigate to app sign-up
-    globalThis.location.href = "https://app.remakeit.io/pricing-auth";
+    globalThis.location.href = addLangParam("https://app.remakeit.io/pricing-auth");
   };
 
   return (

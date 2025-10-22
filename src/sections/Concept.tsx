@@ -12,6 +12,7 @@ import Subtext from "../shared-components/Subtext";
 import TitleRenderer from "../shared-components/TitleRenderer";
 import { useLocation } from "react-router-dom";
 import { trackEvent } from "../utils/analytics";
+import { addLangParam } from "../utils/urlHelper";
 import { useTranslation } from "react-i18next";
 
 const Concept = () => {
@@ -27,7 +28,7 @@ const Concept = () => {
 
     // Navigate to app
     const encodedValue = encodeURIComponent(inputValue.trim());
-    globalThis.location.href = `https://app.remakeit.io/gen/videos/new?idea=${encodedValue}`;
+    globalThis.location.href = addLangParam(`https://app.remakeit.io/gen/videos/new?idea=${encodedValue}`);
   };
 
   const cardsData = [

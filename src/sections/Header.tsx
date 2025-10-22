@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CustomButton from "../shared-components/CustomButton";
 import { useTranslation } from "react-i18next";
 import { trackEvent } from "../utils/analytics";
+import { addLangParam } from "../utils/urlHelper";
 
 const signInUrl = "https://app.remakeit.io/sign-in";
 const signUpUrl = "https://app.remakeit.io/sign-up";
@@ -86,14 +87,14 @@ const Header = () => {
     // Track sign in event
     trackEvent("sign_in_clicked", pathname);
     // Navigate to external sign in page
-    globalThis.location.href = signInUrl;
+    globalThis.location.href = addLangParam(signInUrl);
   };
 
   const handleSignUp = () => {
     // Track sign up event
     trackEvent("sign_up_clicked", pathname);
     // Navigate to external sign up page
-    globalThis.location.href = signUpUrl;
+    globalThis.location.href = addLangParam(signUpUrl);
   };
 
   return (

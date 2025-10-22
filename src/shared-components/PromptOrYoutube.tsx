@@ -3,6 +3,7 @@ import { TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { trackEvent } from "../utils/analytics";
+import { addLangParam } from "../utils/urlHelper";
 import { youtubeLinkRegex } from "../constants";
 import { motion, AnimatePresence } from "framer-motion";
 import GradientOutline from "./GradientOutline";
@@ -39,11 +40,11 @@ const PromptOrYoutube = () => {
     if (isYouTubeLink) {
       // YouTube URL detected
       trackEvent("generate_from_youtube_clicked", pathname, { videoUrl: inputValue });
-      globalThis.location.href = `https://app.remakeit.io/gen/videos/analyse?videourl=${encodedValue}`;
+      globalThis.location.href = addLangParam(`https://app.remakeit.io/gen/videos/analyse?videourl=${encodedValue}`);
     } else {
       // Treat as prompt
       trackEvent("generate_from_prompt_clicked", pathname, { prompt: inputValue });
-      globalThis.location.href = `https://app.remakeit.io/prompt-to-video/videos/new?prompt=${encodedValue}`;
+      globalThis.location.href = addLangParam(`https://app.remakeit.io/prompt-to-video/videos/new?prompt=${encodedValue}`);
     }
   };
 
