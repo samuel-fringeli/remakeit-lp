@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faDiscord } from "@fortawesome/free-brands-svg-icons";
 import RemakeItLogo from "../shared-components/RemakeItLogo";
 import { trackEvent } from "../utils/analytics";
-import { getTrackingParams } from "../utils/urlHelper";
+import { getTrackingParams, addLangParam } from "../utils/urlHelper";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -16,28 +16,36 @@ const Footer = () => {
     {
       title: t("Help"),
       links: [
-        { label: t("Tutorials"), url: "#" },
-        { label: t("Community"), url: "#" },
-        { label: t("Contact us"), url: "#" },
+        { label: t("Tutorials"), url: addLangParam("https://app.remakeit.io/tutorials"), external: true },
+        { label: t("Community"), url: "https://t.me/+pBkwZKLauvk2MGVk?sc=289924664efbd5683f7623c4624dabde3c84b3787", external: true },
+        { label: t("Contact us"), url: "https://docs.remakeit.io/Contact_Us_Remakeit.pdf", external: true },
       ],
     },
     {
       title: t("Company"),
       links: [
-        { label: t("Commercial proposals"), url: "#" },
-        { label: t("Affiliation"), url: "#" },
-        { label: t("Pricing"), url: "/pricing" },
+        { label: t("Commercial proposals"), url: "mailto:myselfpro.contact@gmail.com", external: false },
+        { label: t("Affiliation"), url: "https://affiliate.remakeit.io/", external: true },
+        { label: t("About us"), url: "https://docs.remakeit.io/About_Us_Remakeit.pdf", external: true },
+        { label: t("Pricing"), url: `/pricing${getTrackingParams()}`, external: false },
       ],
     },
     {
       title: t("Legal"),
-      links: [{ label: t("General conditions"), url: "#" }],
+      links: [
+        { label: t("General conditions"), url: "https://docs.remakeit.io/Terms_Conditions_Remakeit.pdf", external: true },
+        { label: t("Shipping Policy"), url: "https://docs.remakeit.io/Delivery_Shipping_Policy_Remakeit.pdf", external: true },
+        { label: t("Legal Attestation"), url: "https://docs.remakeit.io/Legal_Attestation_Remakeit_Formatted.pdf", external: true },
+        { label: t("Privacy policy"), url: "https://docs.remakeit.io/Privacy_Policy_Remakeit.pdf", external: true },
+        { label: t("Refund policy"), url: "https://docs.remakeit.io/Refund_Policy_Remakeit.pdf", external: true },
+        { label: t("Cancellation policy"), url: "https://docs.remakeit.io/-%20[x]%20Cancellation_policy_Remakeit.pdf", external: true },
+      ],
     },
     {
       title: t("Social"),
       links: [
-        { label: <FontAwesomeIcon icon={faInstagram} />, url: "#" },
-        { label: <FontAwesomeIcon icon={faDiscord} />, url: "#" },
+        { label: <FontAwesomeIcon icon={faInstagram} />, url: "https://www.instagram.com/remakeit.io", external: true },
+        { label: <FontAwesomeIcon icon={faDiscord} />, url: "https://discord.gg/6XYxkNkrg6", external: true },
       ],
     },
   ];
@@ -96,7 +104,13 @@ const Footer = () => {
                     key={index}
                     className="text-black/80 hover:text-primary/70"
                   >
-                    <a href={link.url === "/pricing" ? `/pricing${getTrackingParams()}` : link.url}>{link.label}</a>
+                    <a 
+                      href={link.url}
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noopener noreferrer" : undefined}
+                    >
+                      {link.label}
+                    </a>
                   </div>
                 ))}
               </div>
