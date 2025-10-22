@@ -5,7 +5,7 @@ const schema = a.schema({
     .model({
       content: a.string(),
     })
-    .authorization((allow) => [allow.guest().to(['read'])]),
+    .authorization((allow) => [allow.publicApiKey().to(['read'])]),
 });
 
 export const data = defineData({
