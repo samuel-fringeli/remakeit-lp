@@ -14,12 +14,14 @@ import Pricing from "./sections/Pricing";
 import MobileBottomSnackbar from "./shared-components/MobileBottomSnackbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAmplitude } from "./hooks/useAmplitude";
+import { useGTM } from "./hooks/useGTM";
 import { useEffect } from "react";
 
 function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useAmplitude();
+  useGTM();
 
   useEffect(() => {
     // Redirect to home if route is not / or /pricing
