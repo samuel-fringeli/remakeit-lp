@@ -15,7 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CustomButton from "../shared-components/CustomButton";
 import { useTranslation } from "react-i18next";
 import { trackEvent } from "../utils/analytics";
-import { addLangParam } from "../utils/urlHelper";
+import { addLangParam, getTrackingParams } from "../utils/urlHelper";
 
 const signInUrl = "https://app.remakeit.io/sign-in";
 const signUpUrl = "https://app.remakeit.io/sign-up";
@@ -57,9 +57,12 @@ const Header = () => {
     const eventName = item.toLowerCase() + "_nav_menu_clicked";
     trackEvent(eventName, pathname);
     
+    // Get tracking params to preserve
+    const trackingParams = getTrackingParams();
+    
     // Navigate to pricing page if Pricing item (compare with translation)
     if (item === t("Pricing")) {
-      navigate("/pricing");
+      navigate(`/pricing${trackingParams}`);
       window.scrollTo({ top: 0, behavior: "smooth" });
       handleMenuClose();
       return;
@@ -69,7 +72,7 @@ const Header = () => {
     if (pathname === "/") {
       handleScroll(item.toLowerCase());
     } else {
-      navigate("/");
+      navigate(`/${trackingParams}`);
       // Wait for navigation and hero section to render before scrolling
       setTimeout(() => {
         // Use requestAnimationFrame to ensure DOM is fully updated

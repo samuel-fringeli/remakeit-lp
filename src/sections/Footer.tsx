@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faDiscord } from "@fortawesome/free-brands-svg-icons";
 import RemakeItLogo from "../shared-components/RemakeItLogo";
 import { trackEvent } from "../utils/analytics";
+import { getTrackingParams } from "../utils/urlHelper";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -45,12 +46,14 @@ const Footer = () => {
     // Track event
     trackEvent("get_started_now_clicked", pathname);
     
+    const trackingParams = getTrackingParams();
+    
     // If already on home page, just scroll to top
     if (pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       // Navigate to home first, then scroll to top
-      navigate("/");
+      navigate(`/${trackingParams}`);
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }, 100);
@@ -93,7 +96,7 @@ const Footer = () => {
                     key={index}
                     className="text-black/80 hover:text-primary/70"
                   >
-                    <a href={link.url}>{link.label}</a>
+                    <a href={link.url === "/pricing" ? `/pricing${getTrackingParams()}` : link.url}>{link.label}</a>
                   </div>
                 ))}
               </div>

@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import LogoImage from "../assets/LogoImage";
+import { getTrackingParams } from "../utils/urlHelper";
 
 const RemakeItLogo = ({ className }: { className?: string }) => {
   const navigate = useNavigate();
   
   const handleLogoClick = () => {
-    navigate("/");
+    const trackingParams = getTrackingParams();
+    navigate(`/${trackingParams}`);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   
