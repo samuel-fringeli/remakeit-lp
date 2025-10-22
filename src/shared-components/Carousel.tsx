@@ -88,12 +88,12 @@ const Carousel = () => {
           return (
             <div
               key={i}
-              className="relative w-[80px] h-[137px] md:w-[140px] md:h-[240px] flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl border border-white/10 backdrop-blur-sm"
+              className="relative w-[80px] h-[137px] md:w-[140px] md:h-[240px] flex-shrink-0 rounded-2xl overflow-hidden border-1 border-primary"
             >
               <img
                 src={v.src}
                 alt=""
-                className="object-cover w-full h-full opacity-90"
+                className="object-cover w-full h-full"
               />
               <div className="absolute bottom-1 left-1 flex items-center text-white text-sm font-semibold px-2 py-1 rounded-md">
                 <FontAwesomeIcon icon={faPlay} className="me-1" /> {v.views}

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import clsx from "clsx";
+import { useState } from "react";
 import {
   AppBar,
   Box,
@@ -25,7 +24,6 @@ const Header = () => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
 
-  const [isOnDarkSection, setIsOnDarkSection] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuItems = [t("Concept"), t("Services"), t("Pricing")];
@@ -98,58 +96,27 @@ const Header = () => {
     globalThis.location.href = signUpUrl;
   };
 
-  useEffect(() => {
-    // Observe either hero or pricing section depending on current page
-    const darkSectionId = pathname === "/pricing" ? "pricing" : "hero";
-    const darkSection = document.getElementById(darkSectionId);
-    
-    if (!darkSection) {
-      setIsOnDarkSection(false);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsOnDarkSection(entry.isIntersecting);
-      },
-      {
-        root: null,
-        threshold: 0.05,
-      }
-    );
-
-    observer.observe(darkSection);
-    return () => observer.disconnect();
-  }, [pathname]);
-
   return (
     <AppBar
       id="header"
       position="static"
-      className={`!shadow-none py-2 z-20 !bg-transparent transition-colors duration-200 !pb-0 ${
-        isOnDarkSection ? "!text-primary" : "!text-white"
-      } backdrop-blur-lg`}
+      className="!shadow-none py-2 z-20 !bg-transparent !text-gray-900 !pb-0 backdrop-blur-lg"
       sx={{ position: "fixed", top: 0 }}
     >
       <Toolbar className="flex justify-between items-center max-w-7xl mx-auto w-full px-4">
         {/* Left: Logo */}
         <RemakeItLogo
-          className={`transition-colors duration-200 ${isOnDarkSection ? "text-white" : "text-primary"}`}
+          className="md:!text-primary !text-gray-900"
         />
 
         {/* Center menu (desktop) */}
         <Box
-          className={clsx(
-            isOnDarkSection
-              ? "bg-white/60 backdrop-blur-lg border border-white/20"
-              : "bg-primary/60 backdrop-blur-lg border border-primary/20",
-            "hidden lg:absolute right-1/2 translate-x-1/2 w-fit lg:flex items-center gap-6 rounded-full px-6 py-2 transition-all duration-200"
-          )}
+          className="hidden lg:absolute right-1/2 translate-x-1/2 w-fit lg:flex items-center gap-6 rounded-full px-6 py-2 bg-white/60 backdrop-blur-lg border border-gray-200"
         >
           {menuItems.map((item) => (
             <Button
               key={item}
-              className="!text-inherit font-medium hover:text-gray-200"
+              className="!text-gray-900 font-medium hover:!text-primary"
               onClick={() => handleMenuItemClick(item)}
             >
               {item}
@@ -160,7 +127,7 @@ const Header = () => {
         {/* Right side:  buttons */}
         <Box className="hidden lg:flex items-center gap-3">
           <LanguageSelector
-            className={`transition-colors duration-200 ${isOnDarkSection ? "!text-white" : "!text-primary"}`}
+            className="!text-gray-900"
           />
           {/* Login */}
           <CustomButton
@@ -181,16 +148,15 @@ const Header = () => {
         {/* Mobile menu button */}
         <Box className="flex lg:hidden">
           <LanguageSelector
-            className={`transition-colors duration-200 ${isOnDarkSection ? "!text-white" : "!text-primary"}`}
+            className="!text-gray-900"
           />
 
           <IconButton 
             onClick={handleMenuToggle}
-            className="transition-colors duration-200"
             aria-controls="navbar-menu"
             aria-expanded={mobileMenuOpen}
           >
-            <FontAwesomeIcon icon={faBars} className={`${isOnDarkSection ? "text-white" : "text-primary"}`} />
+            <FontAwesomeIcon icon={faBars} className="text-gray-900" />
           </IconButton>
         </Box>
       </Toolbar>
