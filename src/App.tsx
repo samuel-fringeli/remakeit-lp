@@ -16,12 +16,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAmplitude } from "./hooks/useAmplitude";
 import { useGTM } from "./hooks/useGTM";
 import { useEffect } from "react";
+import { trackEvent } from "./utils/analytics";
 
 function App() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   useAmplitude();
   useGTM();
+
+  // Track page view on initial load and route changes
+  useEffect(() => {
+    trackEvent("screen", pathname);
+  }, [pathname]);
 
   useEffect(() => {
     // Redirect to home if route is not / or /pricing
