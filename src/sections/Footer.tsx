@@ -38,7 +38,7 @@ const Footer = () => {
         { label: t("Legal Attestation"), url: "https://docs.remakeit.io/Legal_Attestation_Remakeit_Formatted.pdf", external: true },
         { label: t("Privacy policy"), url: "https://docs.remakeit.io/Privacy_Policy_Remakeit.pdf", external: true },
         { label: t("Refund policy"), url: "https://docs.remakeit.io/Refund_Policy_Remakeit.pdf", external: true },
-        { label: t("Cancellation policy"), url: "https://docs.remakeit.io/-%20[x]%20Cancellation_policy_Remakeit.pdf", external: true },
+        { label: t("Cancellation policy"), url: "https://docs.remakeit.io/Cancellation_policy_Remakeit.pdf", external: true },
       ],
     },
     {
@@ -71,38 +71,40 @@ const Footer = () => {
   return (
     <section
       id="footer"
-      className="relative mx-auto text-white flex flex-col items-center justify-center gap-8 py-24 bg-primary"
+      className="relative text-white bg-primary"
     >
-      <div className="font-semibold text-2xl">
-        {t("Create your next viral video")}
-      </div>
-      <div className="opacity-80 text-xl text-center">
-        {t("Turn your ideas into attractive shorts in just seconds.")}
-      </div>
-      <Button
-        className="!rounded-full !bg-linear-to-b from-black/20 to-black/0 hover:bg-linear-to-b hover:from-white/20 hover:to-white/0 !text-white !px-4 z-10"
-        size="large"
-        onClick={handleGetStartedNow}
-      >
-        <span className="text-lg">{t("Get started now")}</span>
-      </Button>
-      <div className="container">
-        <div className="bg-white w-full rounded-[64px] py-10 px-24 space-y-4 text-primary">
-          <div className="flex flex-wrap text-center text-lg font-semibold space-y-8">
+      <div className="container mx-auto flex flex-col items-center justify-center gap-8 py-24">
+        <div className="font-semibold text-2xl text-center">
+          {t("Create your next viral video")}
+        </div>
+        <div className="opacity-80 text-xs md:text-xl text-center">
+          {t("Turn your ideas into attractive shorts in just seconds.")}
+        </div>
+        <Button
+          className="!rounded-full !bg-linear-to-b from-black/20 to-black/0 hover:bg-linear-to-b hover:from-white/20 hover:to-white/0 !text-white !px-4 z-10"
+          size="large"
+          onClick={handleGetStartedNow}
+        >
+          <span className="text-lg">{t("Get started now")}</span>
+        </Button>
+        <div className="bg-white w-full rounded-[64px] md:py-10 py-4 md:px-24 px-4 space-y-4 text-primary">
+          <div className="flex flex-wrap text-center text-xs md:text-lg font-semibold space-y-4 md:space-y-8">
             <div className="w-full lg:w-[20%]">
-              <RemakeItLogo />
+              <div className="flex justify-center">
+                <RemakeItLogo />
+              </div>
             </div>
 
             {footerMenus.map((menu, index) => (
               <div
-                className="w-full md:w-[50%] lg:w-[20%] lg:last:w-[10%] md:text-left space-y-4"
+                className="w-1/2 md:w-[50%] lg:w-[20%] lg:last:w-[10%] md:text-left space-y-2 md:space-y-4"
                 key={index}
               >
-                <div>{menu.title}</div>
+                <div className="text-xs md:text-lg">{menu.title}</div>
                 {menu.links.map((link, index) => (
                   <div
                     key={index}
-                    className="text-black/80 hover:text-primary/70"
+                    className="text-black/80 hover:text-primary/70 text-[10px] md:text-base"
                   >
                     <a 
                       href={link.url}
@@ -116,12 +118,12 @@ const Footer = () => {
               </div>
             ))}
           </div>
-          <div className="text-center text-lg">© 2025 Remakeit.</div>
+          <div className="text-center text-xs md:text-lg">© 2025 Remakeit.</div>
         </div>
-      </div>
-      {/* Bg text */}
-      <div className="absolute top-0 sm:text-[20vw] font-bold leading-40 tracking-tight select-none opacity-0 md:opacity-5">
-        REMAKEIT
+        {/* Bg text */}
+        <div className="absolute top-0 sm:text-[20vw] font-bold leading-40 tracking-tight select-none opacity-0 md:opacity-5">
+          REMAKEIT
+        </div>
       </div>
     </section>
   );
