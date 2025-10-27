@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { addLangParam } from "../utils/urlHelper";
+import { trackEvent } from "src/utils/analytics";
+import { useLocation } from "react-router-dom";
 
 const MobileBottomSnackbar: React.FC = () => {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -24,6 +27,10 @@ const MobileBottomSnackbar: React.FC = () => {
   }, []);
 
   const handleClick = () => {
+    // Track event
+    trackEvent("bottom_popup_start_click", pathname)
+
+    // Open generator
     window.open(addLangParam("https://app.remakeit.io/gen/videos/new"), "_blank");
   };
 
