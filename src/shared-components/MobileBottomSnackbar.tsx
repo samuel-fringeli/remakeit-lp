@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { addLangParam } from "../utils/urlHelper";
-import { trackEvent } from "src/utils/analytics";
+import { trackEvent } from "../utils/analytics";
 import { useLocation } from "react-router-dom";
 
 const MobileBottomSnackbar: React.FC = () => {
