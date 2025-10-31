@@ -4,6 +4,7 @@ import { Grid } from "@mui/material";
 import servicesCardVeo3 from "../assets/services/services-card-veo-3.avif";
 import promptToVideoAnim from "../assets/services/Prompt to video_1.mp4";
 import autoPublishAnim from "../assets/services/Auto_publish_V1.mp4";
+import remakeitShortsAnim from "../assets/services/Remakeit-shorts.mp4";
 import Subtext from "../shared-components/Subtext";
 import TitleRenderer from "../shared-components/TitleRenderer";
 
@@ -68,7 +69,7 @@ const Services = () => {
       description:
         t("Turn any YouTube video or idea into videos that are ready to post. Detection of the best moments, optimized formats and instant export"),
       imageSrc: "",
-      videoSrc: "",
+      videoSrc: remakeitShortsAnim,
     },
     {
       title: t("Prompt to video"),
